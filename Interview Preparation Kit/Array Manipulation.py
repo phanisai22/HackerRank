@@ -6,40 +6,34 @@ import random
 import re
 import sys
 
+
 # Complete the arrayManipulation function below.
+def arrayManipulation(n, queries):
+    arr = [0] * n
+    for i in queries:
+        arr[i[0] - 1] += i[2]
+        if i[1] != len(arr):
+            arr[i[1]] -= i[2]
+    maxval = 0
+    itt = 0
+    print(arr)
+    for q in arr:
+        itt += q
+        if itt > maxval:
+            maxval = itt
+    return maxval
 
 
-# def arrayManipulation(n, queries):
-#     arr = [0]*n
-#     for i in queries:
-#         for j in range(i[0]-1, i[1]):
-#             arr[j] += i[2]
+if __name__ == '__main__':
+    nm = input().split()
+    n = int(nm[0])
+    m = int(nm[1])
 
-#     return max(arr)
+    queries = []
 
-n, inputs = [int(n) for n in input().split(" ")]
-list = [0]*(n+1)
-for _ in range(inputs):
-    x, y, incr = [int(n) for n in input().split(" ")]
-    list[x-1] += incr
-    if((y) <= len(list)):
-        list[y] -= incr
-max = x = 0
-for i in list:
-   x = x+i
-   if(max < x):
-       max = x
-print(max)
+    for _ in range(m):
+        queries.append(list(map(int, input().rstrip().split())))
 
-# if __name__ == '__main__':
-#     nm = input().split()
-#     n = int(nm[0])
-#     m = int(nm[1])
+    result = arrayManipulation(n, queries)
 
-#     queries = []
-
-#     for _ in range(m):
-#         queries.append(list(map(int, input().rstrip().split())))
-
-#     result = arrayManipulation(n, queries)
-#     print(result)
+    print(result)
